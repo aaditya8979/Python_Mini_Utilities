@@ -19,7 +19,7 @@ Each utility is a standalone Python script:
 * 📝 Word Counter
 * 💬 Random Quote Generator
 * 📁 File Renamer *(coming soon)*
-* ✅ Simple CLI To‑Do List *(coming soon)*
+* ✅ Simple CLI To‑Do List 
 
 Contributors can add new tools or improve existing ones.
 
@@ -115,3 +115,4 @@ Please keep PRs small and focused.
 ---
 
 Happy coding & welcome to open source 🚀
+
