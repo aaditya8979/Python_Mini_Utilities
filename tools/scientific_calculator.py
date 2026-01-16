@@ -6,6 +6,7 @@ import argparse
 try:
     import readline
 except ImportError:
+    # Readline is optional; if unavailable we simply continue without history support.
     pass
 
 class ScientificCalculator:
