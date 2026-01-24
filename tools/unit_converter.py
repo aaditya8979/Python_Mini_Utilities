@@ -157,6 +157,57 @@ def volume_converter():
         print("❌ Invalid input! Please enter a valid number.")
 
 
+def time_converter():
+
+      # Convert between time units.
+
+    print("\n--- Time Converter ---")
+    print("\nAvailable units:")
+    print("1. Second (s)")
+    print("2. Minutes (min)")
+    print("3. Hours (hr)")
+    print("4. Days (day)")
+    print("5. Weeks (wk)")
+    print("6. Months (months)")
+    print("7. Years (yr)")
+
+      # Conversion rates to seconds (base unit)
+    to_sec = {
+        '1': 1,           # Seconds
+        '2': 60,          # Minutes
+        '3': 3600,        # Hours
+        '4': 86400,       # Days
+        '5': 604800,      # Weeks
+        '6': 2592000,      # Months
+        '7': 31536000     # Years
+
+    }
+
+    unit_names = {
+        '1': 'second', '2': 'minutes', '3': 'hours',
+        '4': 'days', '5': 'weeks', '6': 'months', '7': 'years'
+    }
+    
+    try:
+        from_unit = input("\nConvert FROM (enter number): ").strip()
+        to_unit = input("Convert TO (enter number): ").strip()
+        
+        if from_unit not in to_sec or to_unit not in to_sec:
+            print("❌ Invalid unit selection!")
+            return
+        
+        value = float(input(f"\nEnter value in {unit_names[from_unit]}: "))
+        
+        # Convert to liters first- then to target unit
+        in_sec = value * to_sec[from_unit]
+        result = in_sec / to_sec[to_unit]
+        
+        print(f"\n✅ {value} {unit_names[from_unit]} = {result:.4f} {unit_names[to_unit]}")
+        
+    except ValueError:
+        print("❌ Invalid input! Please enter a valid number.")
+  
+
 def main():
 
     while True:
@@ -165,9 +216,10 @@ def main():
         print("\n1. 📏 Length")
         print("2. ⚖️  Weight")
         print("3. 🧪 Volume")
-        print("4. ❌ Exit")
+        print("4. ⏰ Time")
+        print("5. ❌ Exit")
         
-        choice = input("\nEnter your choice (1-4): ").strip()
+        choice = input("\nEnter your choice (1-5): ").strip()
         
         if choice == '1':
             length_converter()
@@ -176,12 +228,14 @@ def main():
         elif choice == '3':
             volume_converter()
         elif choice == '4':
+            time_converter()    
+        elif choice == '5':
             print("\n👋 Thanks for using Unit Converter! Goodbye!\n")
             break
         else:
             print("\n❌ Invalid choice! Please select 1-4.")
         
-        if choice in ['1', '2', '3']:
+        if choice in ['1', '2', '3','4']:
             continue_choice = input("\nConvert another unit? (y/n): ").strip().lower()
             if continue_choice != 'y':
                 print("\n👋 Thanks for using Unit Converter! Goodbye!\n")
