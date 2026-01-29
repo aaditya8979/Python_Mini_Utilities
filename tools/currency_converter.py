@@ -1,3 +1,12 @@
+"""
+Currency Converter Utility
+
+This module provides currency conversion functionality using exchangerate-api.com.
+- No API key required
+- Rate-limited service (free tier)
+- Falls back to predefined rates if API is unavailable
+"""
+
 import json
 import urllib.request
 from typing import Dict, Optional
@@ -7,7 +16,7 @@ class CurrencyConverter:
         # Predefined exchange rates (as a fallback)
         self.rates = {
             'USD': 1.0,
-            'INR': 90.0,    # Indian Rupee
+            'INR': 82.5,    # Indian Rupee
             'EUR': 0.92,    # Euro
             'GBP': 0.79,    # British Pound
             'JPY': 147.8,   # Japanese Yen
@@ -95,6 +104,17 @@ def get_currency(prompt: str, available_currencies: list) -> str:
 def main():
     print("💱 Currency Converter")
     converter = CurrencyConverter()
+    
+    # Ask user if they want to update rates
+    update_choice = input("\nUpdate exchange rates from internet? (y/n, default: n): ").strip().lower()
+    if update_choice == 'y':
+        print("Fetching latest exchange rates from exchangerate-api.com...")
+        if converter.update_rates():
+            print("✅ Rates updated successfully!")
+        else:
+            print("⚠️  Using predefined rates (offline mode)")
+    else:
+        print("Using predefined exchange rates")
     
     while True:
         print("\n" + "="*50)
